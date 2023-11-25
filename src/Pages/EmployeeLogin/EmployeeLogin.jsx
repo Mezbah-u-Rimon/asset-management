@@ -4,6 +4,7 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import { Helmet } from "react-helmet-async";
 
 
 const EmployeeLogin = () => {
@@ -74,9 +75,11 @@ const EmployeeLogin = () => {
     }
 
 
-
     return (
         <div className="md:px-8 md:my-10 my-5 px-4">
+            <Helmet>
+                <title> Asset Management || Employee </title>
+            </Helmet>
             <div className="flex flex-col lg:flex-row">
                 <div className="flex-1">
                     <img src="https://i.ibb.co/1Kmy8fx/undraw-Revenue-re-2bmg.png" alt="" />
