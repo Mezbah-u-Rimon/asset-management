@@ -1,9 +1,7 @@
 import { useForm } from "react-hook-form";
-// import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import { Helmet } from "react-helmet-async";
 
 
@@ -80,12 +78,12 @@ const EmployeeLogin = () => {
             <Helmet>
                 <title> Asset Management || Employee </title>
             </Helmet>
-            <div className="flex flex-col lg:flex-row">
+            <div className="flex flex-col lg:flex-row items-center">
                 <div className="flex-1">
                     <img src="https://i.ibb.co/1Kmy8fx/undraw-Revenue-re-2bmg.png" alt="" />
                 </div>
 
-                <div className="relative mt-8 lg:mt-14 flex-1 flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none ml-5">
+                <div className="relative mt-8  flex-1 flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none ml-5">
                     <h4 className="block text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
                         Employee Register
                     </h4>
@@ -180,8 +178,6 @@ const EmployeeLogin = () => {
                             </Link>
                         </p>
 
-                        {/* social login  */}
-                        <SocialLogin></SocialLogin>
                     </form>
                 </div>
             </div>

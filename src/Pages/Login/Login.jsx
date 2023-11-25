@@ -56,12 +56,12 @@ const Login = () => {
             <Helmet>
                 <title> Asset Management || Login</title>
             </Helmet>
-            <div className="flex flex-col lg:flex-row">
+            <div className="flex flex-col lg:flex-row items-center">
                 <div className="flex-1 -mt-5">
                     <img src="https://i.ibb.co/1Kmy8fx/undraw-Revenue-re-2bmg.png" alt="" />
                 </div>
 
-                <div className="relative mt-8 lg:mt-20 flex-1 flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none ml-5">
+                <div className="relative mt-8 flex-1 flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none ml-5">
                     <h4 className="block text-3xl font-bold leading-snug tracking-normal text-blue-gray-900 antialiased">
                         Login
                     </h4>
