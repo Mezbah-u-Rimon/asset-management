@@ -4,7 +4,7 @@ const About = () => {
     return (
         <div className="flex my-20 flex-col lg:flex-row gap-8 justify-center items-center">
             <div className="flex-1">
-                <img src="https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2023/08/CTA-image2.webp" alt="" />
+                <img src="https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2023/07/HIPAA-compliant-database-dashboard-1.png.webp" alt="" />
             </div>
             <div className="flex-1 px-10 space-y-3">
                 <h3 className="text-xl text-blue-700 font-bold">About us </h3>
