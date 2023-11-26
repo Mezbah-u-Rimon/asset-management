@@ -1,12 +1,15 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const AdminLogin = () => {
     const { createUser, updateUserProfile } = useAuth();
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -14,7 +17,6 @@ const AdminLogin = () => {
         reset,
         formState: { errors },
     } = useForm()
-
 
     const onSubmit = (data) => {
         const name = data.name;
@@ -24,45 +26,53 @@ const AdminLogin = () => {
         const password = data.password;
         const date = data.date;
         const photoURL = data.photoURL;
-        const packages = data.packages;
-        console.log(name, email, password, photoURL, date, companyLogo, companyName, packages)
+        const packages = parseFloat(data.packages);
+        const members = packages === 5 && 5 || packages === 8 && 10 || packages === 15 && 20;
+        const role = "admin";
 
+        // console.log(name, email, password, photoURL, date, companyLogo, companyName, "package", packages, "member", members, role)
 
         createUser(email, password)
             .then(() => {
                 updateUserProfile(name, photoURL)
                     .then(() => {
-                        reset();
+                        // create user entry in the database
+                        const userInfo = {
+                            name,
+                            companyName,
+                            companyLogo,
+                            email,
+                            date,
+                            photoURL,
+                            packages,
+                            members,
+                            role,
+                        }
+
+                        axiosPublic.post('/adminUsers', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: "top",
+                                        icon: "success",
+                                        title: `${name} Admin/HR Register Successfully`,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate("/payment")
+                                }
+                            })
+                    })
+                    .catch(err => {
                         Swal.fire({
                             position: "top",
-                            icon: "success",
-                            title: `${name} Admin/HR Register Successfully`,
+                            icon: "error",
+                            title: err.message,
                             showConfirmButton: false,
                             timer: 2500
                         });
-                        //create user entry in the database
-                        // const userInfo = {
-                        //     name, email
-                        // }
-                        // axiosPublic.post('/users', userInfo)
-                        //     .then(res => {
-                        //         if (res.data.insertedId) {
-                        //             console.log("user added to the database");
-                        //             reset();
-                        //             Swal.fire({
-                        //                 position: "top",
-                        //                 icon: "success",
-                        //                 title: "User Sign Up successfully",
-                        //                 showConfirmButton: false,
-                        //                 timer: 1500
-                        //             });
-                        //             navigate("/")
-                        //         }
-                        //     })
-
-
-                    })
-                    .catch(err => console.log(err));
+                    });
             })
             .catch(err => {
                 Swal.fire({
@@ -70,7 +80,7 @@ const AdminLogin = () => {
                     icon: "error",
                     title: err.message,
                     showConfirmButton: false,
-                    timer: 3000
+                    timer: 2500
                 });
             })
     }
@@ -191,10 +201,10 @@ const AdminLogin = () => {
                             <div className="relative w-full min-w-[200px]">
                                 <select defaultValue='default'  {...register("packages", { required: true, })} className="py-3 border-2 w-full px-3 rounded-lg">
                                     <option disabled value='default'>Select a Package </option>
-                                    <option value="5-members" >  5 Members for $5 </option>
-                                    <option value="10-members"> 10 Members for $8
+                                    <option value="5" >  5 Members for $5 </option>
+                                    <option value="8"> 10 Members for $8
                                     </option>
-                                    <option value="20-members">20 Members for $15
+                                    <option value="15">20 Members for $15
                                     </option>
                                 </select>
                             </div>

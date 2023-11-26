@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const EmployeeLogin = () => {
     const { createUser, updateUserProfile } = useAuth();
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -22,44 +25,43 @@ const EmployeeLogin = () => {
         const password = data.password;
         const date = data.date;
         const photoURL = data.photoURL;
-        console.log(email, password, photoURL, date)
+        const role = "employee";
 
+        console.log(name, email, password, date, photoURL, role);
 
         createUser(email, password)
             .then(() => {
                 updateUserProfile(name, photoURL)
                     .then(() => {
-                        reset();
-                        Swal.fire({
-                            position: "top",
-                            icon: "success",
-                            title: `${name} Employee Register Successfully`,
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        //create user entry in the database
-                        // const userInfo = {
-                        //     name, email
-                        // }
-                        // axiosPublic.post('/users', userInfo)
-                        //     .then(res => {
-                        //         if (res.data.insertedId) {
-                        //             console.log("user added to the database");
-                        //             reset();
-                        //             Swal.fire({
-                        //                 position: "top",
-                        //                 icon: "success",
-                        //                 title: "User Sign Up successfully",
-                        //                 showConfirmButton: false,
-                        //                 timer: 1500
-                        //             });
-                        //             navigate("/")
-                        //         }
-                        //     })
+                        const userInfo = {
+                            name, email, date, photoURL, role
+                        }
+                        axiosPublic.post('/employeeUsers', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: "top",
+                                        icon: "success",
+                                        title: `${name} Employee Register Successfully`,
+                                        showConfirmButton: false,
+                                        timer: 2500
+                                    });
+                                    navigate("/")
+                                }
+                            })
 
 
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => {
+                        Swal.fire({
+                            position: "top",
+                            icon: "error",
+                            title: err.message,
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    });
             })
             .catch(err => {
                 Swal.fire({
@@ -67,7 +69,7 @@ const EmployeeLogin = () => {
                     icon: "error",
                     title: err.message,
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2500
                 });
             })
     }

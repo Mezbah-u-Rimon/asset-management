@@ -61,6 +61,17 @@ const NavItem = () => {
                     Login
                 </NavLink>
             </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="flex items-center gap-x-2 p-1 font-medium"
+            >
+                <IoMdLogIn className="text-xl"></IoMdLogIn>
+                <NavLink to='/payment' className="flex items-center">
+                    Payment
+                </NavLink>
+            </Typography>
 
         </ul>
     );

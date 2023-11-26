@@ -6,6 +6,7 @@ import Main from "../Layout/Main";
 import Login from "../Pages/Login/Login";
 import AdminLogin from "../Pages/AdminLogin/AdminLogin";
 import EmployeeLogin from "../Pages/EmployeeLogin/EmployeeLogin";
+import Payment from "../Pages/Payment/Payment";
 
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <Login></Login>
+            },
+            {
+                path: "/payment",
+                element: <Payment></Payment>
             },
         ]
     },
