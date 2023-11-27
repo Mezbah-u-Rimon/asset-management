@@ -58,7 +58,7 @@ const AdminLogin = () => {
                                         icon: "success",
                                         title: `${name} Admin/HR Register Successfully`,
                                         showConfirmButton: false,
-                                        timer: 1500
+                                        timer: 2500
                                     });
                                     navigate("/payment")
                                 }

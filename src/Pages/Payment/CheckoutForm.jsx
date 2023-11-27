@@ -1,14 +1,49 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
-// import useAxiosAdmin from "../../Hooks/useAxiosAdmin";
+import { useEffect, useState } from "react";
+import useAxiosAdmin from "../../Hooks/useAxiosAdmin";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState("")
-    // const axiosAdmin = useAxiosAdmin()
+    const [clientSecret, setClientSecret] = useState("")
+    const [transactionId, setTransactionId] = useState("")
+    const axiosAdmin = useAxiosAdmin()
+    const axiosPublic = useAxiosPublic()
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
+
+    const { isPending, data: packagePrice = {} } = useQuery({
+        queryKey: ['packagePrice', 'packages'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/adminUsers');
+            const users = await res.data;
+            const usersPrice = await users.find(user => user)
+            return usersPrice.packages
+        }
+    })
+
+
+    useEffect(() => {
+        if (packagePrice > 0) {
+            axiosAdmin.post("/create-payment-intent", { price: packagePrice })
+                .then(res => {
+                    setClientSecret(res.data.clientSecret)
+                })
+        }
+    }, [axiosAdmin, packagePrice])
+
+
+    if (isPending) {
+        return <p>loading </p>;
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -38,58 +73,40 @@ const CheckoutForm = () => {
         }
 
         //confirm payment
-        // const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
-        //     payment_method: {
-        //         card: card,
-        //         billing_details: {
-        //             email: user?.email || 'anonymous',
-        //             name: user?.displayName || 'anonymous',
-        //         }
-        //     }
-        // })
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    email: user?.email || 'anonymous',
+                    name: user?.displayName || 'anonymous',
+                }
+            }
+        })
 
-        // if (confirmError) {
-        //     console.log('confirm error');
-        // }
-        // else {
-        //     console.log('payment intent', paymentIntent);
-        //     if (paymentIntent.status === 'succeeded') {
-        //         console.log('transaction id', paymentIntent.id);
-        //         setTransactionId(paymentIntent.id)
+        if (confirmError) {
+            console.log('confirm error');
+        }
+        else {
+            if (paymentIntent.status === 'succeeded') {
+                setTransactionId(paymentIntent.id)
 
-        //         //now save the payment in the database
-        //         const payment = {
-        //             email: user.email,
-        //             price: totalPrice,
-        //             transactionId: paymentIntent.id,
-        //             date: new Date(), //utc date convert. use moment js to
-        //             cartIds: cart.map(item => item._id),
-        //             menuItemIds: cart.map(item => item.menuId),
-        //             status: 'pending'
-        //         }
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Thank you for the payment",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
-        //         const res = await axiosSecure.post('/payment', payment)
-        //         console.log(res.data);
-        //         refetch();
-
-        //         if (res.data.paymentResult.insertedId) {
-        //             Swal.fire({
-        //                 position: "top-end",
-        //                 icon: "success",
-        //                 title: "Thank you for the payment",
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             });
-        //             navigate('/dashboard/paymentHistory')
-        //         }
-        //     }
-        // }
+                navigate('/')
+            }
+        }
     }
 
 
     return (
         <form onSubmit={handleSubmit}>
-            <CardElement
+            <CardElement className="border-2 border-double py-3 px-3 border-blue-400 md:w-2/4 w-9/12 mx-auto"
                 options={{
                     style: {
                         base: {
@@ -98,7 +115,7 @@ const CheckoutForm = () => {
                             '::placeholder': {
                                 color: '#aab7c4',
                             },
-                            border: '2px solid blue',
+
                         },
                         invalid: {
                             color: '#9e2146',
@@ -106,17 +123,17 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button className="py-2 px-5 border-2 border-double text-blue-500 border-blue-500 mt-4" type="submit"
-             /* disabled={!stripe|| !clientSecret */ >
-                Pay Bill
+            <button className="mx-auto block py-2 px-5 border-2 border-double text-blue-500 border-blue-500 mt-4" type="submit"
+                disabled={!stripe || !clientSecret} >
+                Bay Package
             </button>
-            <p className="text-red-600">
+            <p className="text-red-600 text-center mt-5">
                 {error}
             </p>
             {
-                // transactionId && <p className="text-green-600">
-                //     your transaction id: {transactionId}
-                // </p>
+                transactionId && <p className="text-green-600 text-center mt-5">
+                    your transaction id: {transactionId}
+                </p>
             }
         </form>
     );
