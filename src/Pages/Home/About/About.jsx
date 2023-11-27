@@ -1,13 +1,14 @@
 
 
 const About = () => {
+
     return (
         <div className="flex my-20 flex-col lg:flex-row gap-8 justify-center items-center">
             <div className="flex-1">
                 <img src="https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2023/07/HIPAA-compliant-database-dashboard-1.png.webp" alt="" />
             </div>
             <div className="flex-1 px-10 space-y-3">
-                <h3 className="text-xl text-blue-700 font-bold">About us </h3>
+                <h3 className="text-xl text-indigo-500 font-bold">About us </h3>
                 <h1 className="text-4xl font-bold">Enterprise-Ready Platform</h1>
                 <p className="text-gray-500 pr-10">
                     While business users appreciate the platform for its ease of use, IT experts value the enterprise-grade security, scalability and compliance.

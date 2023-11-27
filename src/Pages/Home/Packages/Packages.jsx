@@ -4,7 +4,7 @@ import { Button, Card, CardBody, CardFooter, Typography } from "@material-tailwi
 const Packages = () => {
     return (
         <div className="mt-14 mb-24">
-            <h1 className="text-4xl font-bold text-center pt-10"> Our <span className="text-blue-700">Packages</span> </h1>
+            <h1 className="text-4xl font-bold text-center pt-10"> Our <span className="text-indigo-500">Packages</span> </h1>
             <p className="md:w-[450px] pt-3 text-center mx-auto pb-10">Comprehensive services and enhanced features for bigger organizations.Offers expanded services and support for growing businesses.</p>
             <div className="flex flex-col lg:flex-row gap-8 justify-evenly items-center">
                 <div>
