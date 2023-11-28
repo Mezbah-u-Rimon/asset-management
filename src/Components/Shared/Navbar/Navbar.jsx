@@ -85,6 +85,17 @@ const NavItem = () => {
                     Add Asset
                 </NavLink>
             </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="flex items-center gap-x-2 p-1 font-medium"
+            >
+                <MdAddShoppingCart className="text-xl"></MdAddShoppingCart>
+                <NavLink to='/assetList' className="flex items-center">
+                    Asset List
+                </NavLink>
+            </Typography>
 
         </ul>
     );

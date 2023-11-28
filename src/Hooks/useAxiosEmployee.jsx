@@ -3,8 +3,8 @@ import axios from "axios";
 // import useAuth from "./useAuth";
 
 const axiosEmployee = axios.create({
-    baseURL: 'http://localhost:5000',
-
+    baseURL: 'https://asset-management-server-one.vercel.app',
+    withCredentials: true,
 })
 
 const useAxiosEmployee = () => {

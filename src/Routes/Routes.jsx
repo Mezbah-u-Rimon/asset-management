@@ -8,6 +8,8 @@ import AdminLogin from "../Pages/AdminLogin/AdminLogin";
 import EmployeeLogin from "../Pages/EmployeeLogin/EmployeeLogin";
 import Payment from "../Pages/Payment/Payment";
 import AddAsset from "../Pages/AdminPages/AddAsset/AddAsset";
+import AssetList from "../Pages/AdminPages/AssetList/AssetList";
+import UpdateItem from "../Pages/AdminPages/UpdateItem/UpdateItem";
 
 
 const router = createBrowserRouter([
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
             {
                 path: "/addAsset",
                 element: <AddAsset></AddAsset>
+            },
+            {
+                path: "/assetList",
+                element: <AssetList></AssetList>
+            },
+            {
+                path: "/updateItem/:id",
+                element: <UpdateItem></UpdateItem>,
             },
         ]
     },

@@ -1,11 +1,15 @@
 import { Helmet } from "react-helmet-async";
-import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxiosAdmin from "../../../Hooks/useAxiosAdmin";
+import { useQuery } from "@tanstack/react-query";
 
 
-const AddAsset = () => {
-    const axiosPublic = useAxiosPublic();
+const UpdateItem = () => {
+    const { id } = useParams()
+    const axiosAdmin = useAxiosAdmin();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -14,54 +18,56 @@ const AddAsset = () => {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data) => {
+    const { refetch, data: items } = useQuery({
+        queryKey: ['updateBlogs'],
+        queryFn: () =>
+            axiosAdmin.get(`/addItems/${id}`)
+                .then((response) => response.data),
+    })
+
+    console.log(items);
+
+    const onSubmit = async (data) => {
+
         const name = data.name;
         const productType = data.productType;
         const type = data.type;
         const quantity = parseFloat(data.quantity);
         const price = parseFloat(data.price);
         const image = data.image;
-        const date = new Date();
 
-
-        const userInfo = {
+        const itemInfo = {
             name,
             image,
             productType,
             quantity,
             price,
-            date,
             type,
         }
 
-        axiosPublic.post('/addItems', userInfo)
-            .then(res => {
-                if (res.data.insertedId) {
-                    reset();
-                    Swal.fire({
-                        position: "top",
-                        icon: "success",
-                        title: `${name} added product Successfully`,
-                        showConfirmButton: false,
-                        timer: 2500
-                    });
-                }
-            })
-            .catch(err => {
-                Swal.fire({
-                    position: "top",
-                    icon: "error",
-                    title: err.message,
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+        const itemResult = await axiosAdmin.patch(`/addItems/${id}`, itemInfo);
+        console.log(itemResult.data);
+        if (itemResult.data.modifiedCount > 0) {
+            reset();
+            refetch()
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `${data.name} is updated to the menu`,
+                showConfirmButton: false,
+                timer: 1500
             });
+            navigate('/assetList')
+
+        }
     }
+
+
 
     return (
         <div className="md:px-8 md:my-10 my-5 px-4">
             <Helmet>
-                <title> Asset Management || Add an Asset </title>
+                <title> Asset Management || Update an Asset </title>
             </Helmet>
             <div className="flex flex-col lg:flex-row justify-center items-center">
                 <div className="flex-1">
@@ -70,18 +76,16 @@ const AddAsset = () => {
 
                 <div className="relative mt-8 lg:mt-8 flex-1 flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none ml-5">
                     <h4 className="block text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                        Add an new Asset Product
+                        Update an Asset Product
                     </h4>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-2  w-3/4 ">
                         <div className="mb-4 flex flex-col gap-6">
 
                             <div className="relative h-11 w-full min-w-[200px]">
-
-                                <input
+                                <input defaultValue={items?.name}
                                     type="text"                        {...register("name", { required: true })}
                                     className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-700 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-
                                 />
                                 {errors.name && <span className="text-red-600 mt-1">Name is required</span>}
 
@@ -90,7 +94,7 @@ const AddAsset = () => {
                                 </label>
                             </div>
                             <div className="relative h-11 w-full min-w-[200px]">
-                                <input
+                                <input defaultValue={items?.quantity}
                                     type="number"                        {...register("quantity", { required: true })}
                                     className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-700 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
 
@@ -102,7 +106,7 @@ const AddAsset = () => {
                                 </label>
                             </div>
                             <div className="relative h-11 w-full min-w-[200px]">
-                                <input
+                                <input defaultValue={items?.price}
                                     type="text"                        {...register("price", { required: true })}
                                     className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-700 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
 
@@ -115,7 +119,7 @@ const AddAsset = () => {
                             </div>
 
                             <div className="relative h-11 w-full min-w-[200px]">
-                                <input
+                                <input defaultValue={items?.image}
                                     type="text"
                                     {...register("image", { required: true })}
                                     className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-700 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
@@ -127,7 +131,7 @@ const AddAsset = () => {
                             </div>
 
                             <div className="relative w-full min-w-[200px]">
-                                <select defaultValue='default'  {...register("productType", { required: true, })} className="py-3 border-2 w-full px-3 rounded-lg">
+                                <select defaultValue={items?.productType}  {...register("productType", { required: true, })} className="py-3 border-2 w-full px-3 rounded-lg">
                                     <option disabled value='default'>Select a Product Category </option>
                                     <option value="Phone" > Mobile phone </option>
                                     <option value="Television"> Television
@@ -152,7 +156,7 @@ const AddAsset = () => {
                                 </select>
                             </div>
                             <div className="relative w-full min-w-[200px]">
-                                <select defaultValue='default'  {...register("type", { required: true, })} className="py-3 border-2 w-full px-3 rounded-lg">
+                                <select defaultValue={items?.type}  {...register("type", { required: true, })} className="py-3 border-2 w-full px-3 rounded-lg">
                                     <option disabled value='default'>Select a Product Type </option>
                                     <option value="Returnable" > Returnable  </option>
                                     <option value="Non-Returnable"> Non Returnable
@@ -176,4 +180,4 @@ const AddAsset = () => {
     );
 };
 
-export default AddAsset;
+export default UpdateItem;
