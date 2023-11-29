@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import useAxiosEmployee from "../../../Hooks/useAxiosEmployee";
 
 
-const AddAsset = () => {
-    const axiosPublic = useAxiosPublic();
+const RequestPage = () => {
+    const axiosEmployee = useAxiosEmployee()
 
     const {
         register,
@@ -14,27 +14,35 @@ const AddAsset = () => {
         formState: { errors },
     } = useForm()
 
+
     const onSubmit = (data) => {
-        const name = data.name;
-        const productType = data.productType;
+        const productName = data.productName;
+        const productCategory = data.productType;
         const type = data.type;
-        const quantity = parseFloat(data.quantity);
         const price = parseFloat(data.price);
         const image = data.image;
+        const whyYouNeed = data.whyYouNeed;
+        const information = data.information;
+        const pending = true;
+        const approved = false;
         const date = new Date();
 
+        console.log(productName, image, productCategory, price, date, type, whyYouNeed, information, pending, approved);
 
-        const userInfo = {
-            name,
+        const requestInfo = {
+            productName,
             image,
-            productType,
-            quantity,
+            productCategory,
             price,
             date,
             type,
+            whyYouNeed,
+            information,
+            approved,
+            pending,
         }
 
-        axiosPublic.post('/addItems', userInfo)
+        axiosEmployee.post('/requestItem', requestInfo)
             .then(res => {
                 if (res.data.insertedId) {
                     reset();
@@ -61,7 +69,7 @@ const AddAsset = () => {
     return (
         <div className="md:px-8 md:my-10 my-5 px-4">
             <Helmet>
-                <title> Asset Management || Add an Asset </title>
+                <title> Asset Management || Request Asset </title>
             </Helmet>
             <div className="flex flex-col lg:flex-row justify-center items-center">
                 <div className="flex-1">
@@ -70,16 +78,17 @@ const AddAsset = () => {
 
                 <div className="relative mt-8 lg:mt-8 flex-1 flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none ml-5">
                     <h4 className="block text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                        Add an new Asset Product
+                        Request an Asset Product
                     </h4>
 
-                    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-2  w-3/4 ">
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="mt-8 mb-2  w-3/4 ">
                         <div className="mb-4 flex flex-col gap-6">
 
                             <div className="relative h-11 w-full min-w-[200px]">
-
                                 <input
-                                    type="text"                        {...register("name", { required: true })}
+                                    type="text"                        {...register("productName", { required: true })}
                                     className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-700 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
 
                                 />
@@ -89,18 +98,7 @@ const AddAsset = () => {
                                     Product Name
                                 </label>
                             </div>
-                            <div className="relative h-11 w-full min-w-[200px]">
-                                <input
-                                    type="number"                        {...register("quantity", { required: true })}
-                                    className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-700 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
 
-                                />
-                                {errors.quantity && <span className="text-red-600 mt-1">Product Quantity is required</span>}
-
-                                <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-blue-700 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-blue-700 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-blue-700 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                                    Product Quantity
-                                </label>
-                            </div>
                             <div className="relative h-11 w-full min-w-[200px]">
                                 <input
                                     type="text"                        {...register("price", { required: true })}
@@ -160,6 +158,28 @@ const AddAsset = () => {
 
                                 </select>
                             </div>
+                            <div className="relative h-11 w-full min-w-[200px]">
+                                <input
+                                    type="text"                        {...register("whyYouNeed")}
+                                    className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-700 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+
+                                />
+
+                                <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-blue-700 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-blue-700 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-blue-700 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                                    Why you need this
+                                </label>
+                            </div>
+                            <div className="relative h-11 w-full min-w-[200px]">
+                                <input
+                                    type="text"                        {...register("information")}
+                                    className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-700 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+
+                                />
+
+                                <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-blue-700 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-blue-700 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-blue-700 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                                    Additional Information
+                                </label>
+                            </div>
                         </div>
 
                         <button
@@ -167,7 +187,7 @@ const AddAsset = () => {
                             type="submit"
                             data-ripple-light="true"
                         >
-                            Add Asset
+                            Request
                         </button>
                     </form>
                 </div>
@@ -176,4 +196,4 @@ const AddAsset = () => {
     );
 };
 
-export default AddAsset;
+export default RequestPage;

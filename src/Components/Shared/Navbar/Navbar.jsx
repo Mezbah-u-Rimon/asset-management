@@ -8,8 +8,8 @@ import {
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
 import { FaHome, FaUser, FaUsers } from "react-icons/fa";
-import { IoMdLogIn } from "react-icons/io";
-import { MdPayment } from "react-icons/md";
+// import { IoMdLogIn } from "react-icons/io";
+// import { MdPayment } from "react-icons/md";
 import { MdAddShoppingCart } from "react-icons/md";
 
 
@@ -30,7 +30,7 @@ const NavItem = () => {
                     Home
                 </NavLink>
             </Typography>
-            <Typography
+            {/* <Typography
                 as="li"
                 variant="small"
                 color="blue-gray"
@@ -73,7 +73,7 @@ const NavItem = () => {
                 <NavLink to='/payment' className="flex items-center">
                     Payment
                 </NavLink>
-            </Typography>
+            </Typography> */}
             <Typography
                 as="li"
                 variant="small"
@@ -96,7 +96,7 @@ const NavItem = () => {
                     Asset List
                 </NavLink>
             </Typography>
-            <Typography
+            {/* <Typography
                 as="li"
                 variant="small"
                 color="blue-gray"
@@ -116,6 +116,19 @@ const NavItem = () => {
                 <FaUsers className="text-xl"></FaUsers>
                 <NavLink to='/myTeam' className="flex items-center">
                     My Team
+                </NavLink>
+            </Typography> */}
+
+            {/* employee section  */}
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="flex items-center gap-x-2 p-1 font-medium"
+            >
+                <FaUsers className="text-xl"></FaUsers>
+                <NavLink to='/requestPage' className="flex items-center">
+                    Custom Request
                 </NavLink>
             </Typography>
 

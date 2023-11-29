@@ -12,6 +12,7 @@ import AssetList from "../Pages/AdminPages/AssetList/AssetList";
 import UpdateItem from "../Pages/AdminPages/UpdateItem/UpdateItem";
 import AddEmployee from "../Pages/AdminPages/AddEmployee/AddEmployee";
 import MyTeam from "../Pages/AdminPages/MyTeam/MyTeam";
+import RequestPage from "../Pages/EmployeePages/RequestPage/RequestPage";
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,12 @@ const router = createBrowserRouter([
             {
                 path: "/myTeam",
                 element: <MyTeam></MyTeam>//ata sobai dekhbe
+            },
+
+            //employees route
+            {
+                path: "/requestPage",
+                element: <RequestPage></RequestPage>
             },
         ]
     },

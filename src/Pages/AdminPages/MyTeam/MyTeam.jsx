@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import useGetAdmin from "../../../Hooks/useGetAdmin";
 import useAdmin from "../../../Hooks/useAdmin";
 import UpcomingEvents from "./UpcomingEvents";
+import { Circles } from "react-loader-spinner";
 
 
 const MyTeam = () => {
@@ -13,13 +14,15 @@ const MyTeam = () => {
     const { user } = useAuth()
     const [isAdmin] = useAdmin()
 
-    const { data: myTeam = [], refetch, } = useQuery({
+    const { data: myTeam = [], refetch, isPending } = useQuery({
         queryKey: ['myTeam'],
         queryFn: async () => {
             const res = await axiosAdmin.get(`/addTeam/${user.email}`)
             return res.data;
         }
     })
+
+    // const myEmployee = myTeam?.find((item) => item)
 
     const { allAdmin } = useGetAdmin(user.email)
 
@@ -62,13 +65,28 @@ const MyTeam = () => {
 
     }
 
+    if (isPending) {
+        <div className="flex justify-center items-center w-full h-[300px] bg-white">
+            <Circles
+                height="80"
+                width="80"
+                color="indigo"
+                ariaLabel="circles-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+            /> </div>
+    }
+
+
+
 
     return (
+
         <div className="mb-20">
             <div className="flex gap-3 justify-evenly my-16 items-center">
                 <h2 className="text-3xl"> All Employees </h2>
                 <h2 className="text-3xl"> Total Employee {myTeam.length} </h2>
-
             </div>
 
             <div className="overflow-x-auto">
@@ -126,6 +144,7 @@ const MyTeam = () => {
                 <UpcomingEvents myTeam={myTeam}> </UpcomingEvents>
             </div>
         </div>
+
     );
 };
 

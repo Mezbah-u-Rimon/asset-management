@@ -10,7 +10,6 @@ const UpcomingEvents = (myTeam) => {
         return birthDate.getTime() >= today.getTime();
     });
 
-    console.log(upcomingBirthdays);
     return (
         <div className="my-10">
             <h2 className="text-4xl font-bold text-indigo-500 text-center py-10">Upcoming Events </h2>
