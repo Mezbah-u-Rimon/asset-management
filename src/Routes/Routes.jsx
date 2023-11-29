@@ -59,7 +59,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/myTeam",
-                element: <MyTeam></MyTeam>
+                element: <MyTeam></MyTeam>//ata sobai dekhbe
             },
         ]
     },

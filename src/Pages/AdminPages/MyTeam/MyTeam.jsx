@@ -4,12 +4,14 @@ import useAuth from "../../../Hooks/useAuth";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useGetAdmin from "../../../Hooks/useGetAdmin";
+import useAdmin from "../../../Hooks/useAdmin";
+import UpcomingEvents from "./UpcomingEvents";
 
 
 const MyTeam = () => {
     const axiosAdmin = useAxiosAdmin()
     const { user } = useAuth()
-
+    const [isAdmin] = useAdmin()
 
     const { data: myTeam = [], refetch, } = useQuery({
         queryKey: ['myTeam'],
@@ -19,9 +21,7 @@ const MyTeam = () => {
         }
     })
 
-
     const { allAdmin } = useGetAdmin(user.email)
-
 
     const handleDeleteTeam = async (id) => {
         const totalMembers = {
@@ -108,15 +108,22 @@ const MyTeam = () => {
                                     {team.role}
                                 </td>
                                 <th>
-                                    <button onClick={() => handleDeleteTeam(team._id)} className="btn btn-ghost ">
+                                    {isAdmin ? <button onClick={() => handleDeleteTeam(team._id)} className="btn btn-ghost ">
                                         <FaTrash className="text-xl text-red-500"></FaTrash>
-                                    </button>
+                                    </button> :
+                                        <button disabled className="btn btn-ghost ">
+                                            <FaTrash className="text-xl text-red-500"></FaTrash>
+                                        </button>}
                                 </th>
                             </tr>)
                         }
 
                     </tbody>
                 </table>
+            </div>
+
+            <div>
+                <UpcomingEvents myTeam={myTeam}> </UpcomingEvents>
             </div>
         </div>
     );
