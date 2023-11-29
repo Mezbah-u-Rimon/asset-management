@@ -96,6 +96,28 @@ const NavItem = () => {
                     Asset List
                 </NavLink>
             </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="flex items-center gap-x-2 p-1 font-medium"
+            >
+                <FaUsers className="text-xl"></FaUsers>
+                <NavLink to='/addEmployee' className="flex items-center">
+                    Add Employee
+                </NavLink>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="flex items-center gap-x-2 p-1 font-medium"
+            >
+                <FaUsers className="text-xl"></FaUsers>
+                <NavLink to='/myTeam' className="flex items-center">
+                    My Team
+                </NavLink>
+            </Typography>
 
         </ul>
     );

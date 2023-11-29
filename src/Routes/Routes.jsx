@@ -10,6 +10,8 @@ import Payment from "../Pages/Payment/Payment";
 import AddAsset from "../Pages/AdminPages/AddAsset/AddAsset";
 import AssetList from "../Pages/AdminPages/AssetList/AssetList";
 import UpdateItem from "../Pages/AdminPages/UpdateItem/UpdateItem";
+import AddEmployee from "../Pages/AdminPages/AddEmployee/AddEmployee";
+import MyTeam from "../Pages/AdminPages/MyTeam/MyTeam";
 
 
 const router = createBrowserRouter([
@@ -50,6 +52,14 @@ const router = createBrowserRouter([
             {
                 path: "/updateItem/:id",
                 element: <UpdateItem></UpdateItem>,
+            },
+            {
+                path: "/addEmployee",
+                element: <AddEmployee></AddEmployee>,
+            },
+            {
+                path: "/myTeam",
+                element: <MyTeam></MyTeam>
             },
         ]
     },

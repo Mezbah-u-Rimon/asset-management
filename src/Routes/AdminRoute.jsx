@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useAdmin from "../Hooks/useAdmin";
+import { Circles } from "react-loader-spinner";
 
 const AdminRoute = ({ children }) => {
     const { user, loading } = useAuth()
@@ -9,7 +10,18 @@ const AdminRoute = ({ children }) => {
 
 
     if (loading || isAdminLoading) {
-        return <p>loading </p>
+        return (<div className="flex justify-center items-center w-full h-[300px] bg-white">
+            <Circles
+                height="80"
+                width="80"
+                color="indigo"
+                ariaLabel="circles-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+            /> </div>)
+
+
     }
 
     if (user && isAdmin) {

@@ -19,13 +19,12 @@ const UpdateItem = () => {
     } = useForm()
 
     const { refetch, data: items } = useQuery({
-        queryKey: ['updateBlogs'],
+        queryKey: ['items'],
         queryFn: () =>
             axiosAdmin.get(`/addItems/${id}`)
                 .then((response) => response.data),
     })
 
-    console.log(items);
 
     const onSubmit = async (data) => {
 
@@ -46,7 +45,6 @@ const UpdateItem = () => {
         }
 
         const itemResult = await axiosAdmin.patch(`/addItems/${id}`, itemInfo);
-        console.log(itemResult.data);
         if (itemResult.data.modifiedCount > 0) {
             reset();
             refetch()
