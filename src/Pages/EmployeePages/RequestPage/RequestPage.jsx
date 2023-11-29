@@ -28,7 +28,6 @@ const RequestPage = () => {
     })
 
     refetch();
-    console.log(items);
 
     const onSubmit = async (data) => {
         const productName = data.productName;
@@ -43,6 +42,7 @@ const RequestPage = () => {
         const date = new Date();
         const requesterEmail = user.email;
         const requesterName = user.displayName;
+        const approvalDate = "";
 
         //patch the addItems  collection
         const quantity = items.quantity - 1;
@@ -74,6 +74,7 @@ const RequestPage = () => {
             pending,
             requesterName,
             requesterEmail,
+            approvalDate
         }
 
 
@@ -111,8 +112,6 @@ const RequestPage = () => {
                     });
                 });
         }
-
-
     }
 
     return (

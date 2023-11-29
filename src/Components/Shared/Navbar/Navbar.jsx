@@ -7,7 +7,7 @@ import {
     IconButton,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaUser, FaUsers } from "react-icons/fa";
+import { FaHome, FaListAlt, FaRecycle, FaUser, FaUsers } from "react-icons/fa";
 // import { IoMdLogIn } from "react-icons/io";
 // import { MdPayment } from "react-icons/md";
 import { MdAddShoppingCart } from "react-icons/md";
@@ -126,9 +126,20 @@ const NavItem = () => {
                 color="blue-gray"
                 className="flex items-center gap-x-2 p-1 font-medium"
             >
-                <FaUsers className="text-xl"></FaUsers>
+                <FaRecycle className="text-xl"></FaRecycle>
                 <NavLink to='/assetPage' className="flex items-center">
                     Request Asset
+                </NavLink>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="flex items-center gap-x-2 p-1 font-medium"
+            >
+                <FaListAlt className="text-xl"></FaListAlt>
+                <NavLink to='/myAssetPage' className="flex items-center">
+                    My Asset Page
                 </NavLink>
             </Typography>
 

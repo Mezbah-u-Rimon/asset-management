@@ -31,37 +31,36 @@ const MyTeam = () => {
             members: allAdmin.members + 1,
         }
 
-        if (allAdmin.members <= 20) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to delete this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axiosAdmin.delete(`/addTeam/${id}`)
-                        .then(async (res) => {
-                            if (res.data.deletedCount > 0) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to delete this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosAdmin.delete(`/addTeam/${id}`)
+                    .then(async (res) => {
+                        if (res.data.deletedCount > 0) {
 
-                                //update admin route
-                                const adminResult = await axiosAdmin.patch(`/adminUsers/${allAdmin._id}`, totalMembers);
+                            //update admin route
+                            const adminResult = await axiosAdmin.patch(`/adminUsers/${allAdmin._id}`, totalMembers);
 
-                                if (adminResult.data.modifiedCount > 0) {
-                                    refetch()
-                                    Swal.fire({
-                                        title: "Deleted!",
-                                        text: "Your file has been deleted.",
-                                        icon: "success"
-                                    });
-                                }
+                            if (adminResult.data.modifiedCount > 0) {
+                                refetch()
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
                             }
-                        })
-                }
-            });
-        }
+                        }
+                    })
+            }
+        });
+
 
     }
 
