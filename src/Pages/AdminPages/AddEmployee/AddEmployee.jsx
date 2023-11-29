@@ -40,7 +40,7 @@ const AddEmployee = () => {
             members: allAdmin.members - 1,
         }
 
-        if (allAdmin.members > 0 && allAdmin.members <= 10) {
+        if (allAdmin.members > 0 && allAdmin.members <= allAdmin.members) {
 
             axiosAdmin.post('/addTeam', userInfo)
                 .then(async (res) => {

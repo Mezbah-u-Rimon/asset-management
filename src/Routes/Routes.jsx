@@ -13,6 +13,7 @@ import UpdateItem from "../Pages/AdminPages/UpdateItem/UpdateItem";
 import AddEmployee from "../Pages/AdminPages/AddEmployee/AddEmployee";
 import MyTeam from "../Pages/AdminPages/MyTeam/MyTeam";
 import RequestPage from "../Pages/EmployeePages/RequestPage/RequestPage";
+import AssetPage from "../Pages/EmployeePages/AssetPage/AssetPage";
 
 
 const router = createBrowserRouter([
@@ -65,7 +66,11 @@ const router = createBrowserRouter([
 
             //employees route
             {
-                path: "/requestPage",
+                path: "/assetPage",
+                element: <AssetPage></AssetPage>
+            },
+            {
+                path: "/requestPage/:id",
                 element: <RequestPage></RequestPage>
             },
         ]

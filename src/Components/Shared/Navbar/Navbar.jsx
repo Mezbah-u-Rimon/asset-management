@@ -127,8 +127,8 @@ const NavItem = () => {
                 className="flex items-center gap-x-2 p-1 font-medium"
             >
                 <FaUsers className="text-xl"></FaUsers>
-                <NavLink to='/requestPage' className="flex items-center">
-                    Custom Request
+                <NavLink to='/assetPage' className="flex items-center">
+                    Request Asset
                 </NavLink>
             </Typography>
 

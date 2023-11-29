@@ -2,6 +2,7 @@ import { Circles } from "react-loader-spinner";
 import useAssetList from "../../../Hooks/useAssetList";
 import { Input } from "@material-tailwind/react";
 import { useState } from "react";
+import AssetPageItem from "./AssetPageItem";
 
 
 const AssetPage = () => {
@@ -68,10 +69,10 @@ const AssetPage = () => {
             }
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-14 mb-20">
-                {/* {
-                    allItems?.map(item => <AssetItem key={item._id} item={item} refetch={refetch}>
-                    </AssetItem>)
-                } */}
+                {
+                    allItems?.map(item => <AssetPageItem key={item._id} item={item} >
+                    </AssetPageItem>)
+                }
             </div>
         </div>
     );

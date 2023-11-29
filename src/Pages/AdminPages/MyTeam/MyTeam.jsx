@@ -31,7 +31,7 @@ const MyTeam = () => {
             members: allAdmin.members + 1,
         }
 
-        if (allAdmin.members > 0 && allAdmin.members <= 10) {
+        if (allAdmin.members <= 20) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to delete this!",
