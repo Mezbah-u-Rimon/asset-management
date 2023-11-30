@@ -15,6 +15,7 @@ import MyTeam from "../Pages/AdminPages/MyTeam/MyTeam";
 import RequestPage from "../Pages/EmployeePages/RequestPage/RequestPage";
 import AssetPage from "../Pages/EmployeePages/AssetPage/AssetPage";
 import MyAssetPage from "../Pages/EmployeePages/MyAssetPage/MyAssetPage";
+import AllRequestPage from "../Pages/AdminPages/AllRequestPage/AllRequestPage";
 
 
 const router = createBrowserRouter([
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: "/addEmployee",
                 element: <AddEmployee></AddEmployee>,
+            },
+            {
+                path: "/allRequestPage",
+                element: <AllRequestPage></AllRequestPage>,
             },
             {
                 path: "/myTeam",

@@ -87,9 +87,7 @@ const RequestPage = () => {
                     if (res.data.insertedId) {
                         //update admin route
                         const addItemResult = await axiosEmployee.patch(`/addItems/${id}`, totalQuantity);
-
                         if (addItemResult.data.modifiedCount > 0) {
-
                             reset();
                             Swal.fire({
                                 position: "top",

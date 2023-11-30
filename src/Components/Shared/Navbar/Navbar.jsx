@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 import { FaHome, FaListAlt, FaRecycle, FaUser, FaUsers } from "react-icons/fa";
 // import { IoMdLogIn } from "react-icons/io";
 // import { MdPayment } from "react-icons/md";
-import { MdAddShoppingCart } from "react-icons/md";
+import { MdAddShoppingCart, MdRequestPage } from "react-icons/md";
 
 
 const NavItem = () => {
@@ -94,6 +94,17 @@ const NavItem = () => {
                 <MdAddShoppingCart className="text-xl"></MdAddShoppingCart>
                 <NavLink to='/assetList' className="flex items-center">
                     Asset List
+                </NavLink>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="flex items-center gap-x-2 p-1 font-medium"
+            >
+                <MdRequestPage className="text-xl"></MdRequestPage>
+                <NavLink to='/allRequestPage' className="flex items-center">
+                    All Request
                 </NavLink>
             </Typography>
             {/* <Typography

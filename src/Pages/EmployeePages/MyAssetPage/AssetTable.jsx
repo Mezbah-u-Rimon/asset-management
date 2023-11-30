@@ -11,9 +11,6 @@ const AssetTable = ({ item, idx, refetch }) => {
 
 
     const handleDeleteItem = async (id) => {
-        const totalMembers = {
-            // members: allAdmin.members + 1,
-        }
 
         Swal.fire({
             title: "Are you sure?",
@@ -28,18 +25,12 @@ const AssetTable = ({ item, idx, refetch }) => {
                 axiosPublic.delete(`/requestItem/${id}`)
                     .then(async (res) => {
                         if (res.data.deletedCount > 0) {
-
-                            //update Item route
-                            const adminResult = await axiosPublic.patch(`/adminUsers/${id}`, totalMembers);
-
-                            if (adminResult.data.modifiedCount > 0) {
-                                refetch()
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your file has been deleted.",
-                                    icon: "success"
-                                });
-                            }
+                            refetch()
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
                         }
                     })
             }
@@ -73,12 +64,16 @@ const AssetTable = ({ item, idx, refetch }) => {
             </td>
             <td>
                 {
-                    pending == true ? <button className="btn btn-xs bg-orange-400 hover:bg-orange-400"> Pending </button> : <button className="btn btn-xs bg-green-400 disabled"> Approve </button>
+                    pending == true ? <p className="text-orange-500 font-bold"> Pending </p> : <p className="text-green-500 font-bold"> Approve </p>
                 }
             </td>
             <th>
                 {
-                    pending == true && type == "Returnable" ? <button onClick={() => handleDeleteItem(_id)} className="btn btn-xs text-red-500"> Cancel </button> : <button className="btn btn-xs bg-green-400 disabled"> Return </button>
+                    pending === true ? <button onClick={() => handleDeleteItem(_id)} className="btn btn-xs text-red-500"> Cancel </button>
+                        :
+                        <> {type == "Returnable" ?
+                            <button onClick={() => handleDeleteItem(_id)} className="btn btn-xs bg-green-400 disabled"> Return </button> : <p> Non-Returnable </p>}
+                        </>
                 }
             </th>
         </tr>

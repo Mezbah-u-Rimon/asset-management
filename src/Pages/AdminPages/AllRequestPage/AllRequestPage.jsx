@@ -1,37 +1,33 @@
-import { useState } from "react";
 import { Input } from "@material-tailwind/react";
-import useAuth from "../../../Hooks/useAuth";
+import { useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { Circles } from "react-loader-spinner";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import AssetTable from "./AssetTable";
-import { Circles } from "react-loader-spinner";
-import { Helmet } from "react-helmet-async";
+import AllRequestTable from "./AllRequestTable";
 
 
-const MyAssetPage = () => {
+const AllRequestPage = () => {
     const [search, setSearch] = useState("");
-    const [filter, setFilter] = useState("");
-    const { user } = useAuth();
     const axiosPublic = useAxiosPublic()
 
 
     const { data: requestItems = [], isPending, refetch, } = useQuery({
         queryKey: ['requestItems'],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/requestItem/${user.email}?search=${search}&filter=${filter}`)
+            const res = await axiosPublic.get(`/requestItem?search=${search}`)
             return res.data;
         }
     })
     refetch()
 
-
     return (
         <div className="mt-20 mb-36">
             <Helmet>
-                <title> Asset Management || Requester Asset Page</title>
+                <title> Asset Management || Requester Page Admin </title>
             </Helmet>
             <h1 className="text-4xl font-bold text-indigo-500 text-center mt-10 mb-14">
-                My Asset Request List
+                All Asset Request List
             </h1>
             <div className="flex flex-col lg:flex-row justify-center items-center lg:justify-around gap-5 mb-14">
                 {/* search section  */}
@@ -40,15 +36,6 @@ const MyAssetPage = () => {
                         size="lg" label="Search The Item Name" type="search" className="shadow-lg border-2" />
                 </div>
 
-                {/* filter quantity */}
-                <div className="relative w-[250px] ">
-                    <select onChange={(e) => setFilter(e.target.value)} defaultValue='default' className="py-3 border-2 w-full px-3 rounded-lg">
-                        <option disabled value='default'>Filter Product Type  </option>
-                        <option value="Returnable" > Returnable </option>
-                        <option value="Non-Returnable"> Non-Returnable
-                        </option>
-                    </select>
-                </div>
             </div>
 
             {
@@ -68,20 +55,21 @@ const MyAssetPage = () => {
                 <table className="table w-full text-center">
                     <thead>
                         <tr>
-                            <th>
-                                #
-                            </th>
-                            <th>Image </th>
-                            <th>Name </th>
+                            <th>#</th>
+                            <th>Product Name </th>
+                            <th>Type </th>
+                            <th>Requester Email </th>
+                            <th>Requester Name </th>
                             <th>Request Date  </th>
-                            <th>Approval Date </th>
+                            <th>Additional Note </th>
                             <th> Status </th>
-                            <th> Action </th>
+                            <th> Approve </th>
+                            <th> Reject </th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            requestItems?.map((item, idx) => <AssetTable key={item._id} item={item} idx={idx} refetch={refetch}></AssetTable>
+                            requestItems?.map((item, idx) => <AllRequestTable key={item._id} item={item} idx={idx} refetch={refetch}></AllRequestTable>
                             )
                         }
 
@@ -92,4 +80,4 @@ const MyAssetPage = () => {
     );
 };
 
-export default MyAssetPage;
+export default AllRequestPage;
