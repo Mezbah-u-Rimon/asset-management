@@ -31,25 +31,25 @@ const Logo = () => {
                     <img className='h-[70px]' src="https://vectorlogoseek.com/wp-content/uploads/2019/11/getapp-vector-logo.png" alt="" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img className='h-[70px]' src="https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2021/01/gartner.png.webp" alt="" />
+                    <img className='h-[70px]' src="https://cdn2.f-cdn.com/contestentries/993113/22134461/58e80e93d1558_thumb900.jpg" alt="" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img className='h-[70px]' src="https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2022/02/g2-best-software-2022-badge-it-infrastructure.svg" alt="" />
+                    <img className='h-[70px]' src="https://i.ibb.co/84txBzC/Screenshot-70-removebg-preview.png" alt="" />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img className='h-[70px]' src="https://www.tmgm.co.nz/img/main-logo-white.png" alt="" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img className='h-[70px]' src="https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2022/01/getapp-2021.png.webp" alt="" />
+                    <img className='h-[70px]' src="https://i.ibb.co/zQWppCH/Screenshot-69-removebg-preview.png" alt="" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img className='h-[70px]' src="https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2022/02/users-love-us.svg" alt="" />
+                    <img className='h-[70px]' src="https://i.ibb.co/sPKHgtp/Screenshot-68-removebg-preview.png" alt="" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img className='h-[70px]' src="https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2022/01/aws-advanced-technology-partner.svg" alt="" />
+                    <img className='h-[70px]' src="https://i.ibb.co/Rg9930M/Screenshot-67-removebg-preview.png" alt="" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img className='h-[70px]' src="https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2022/02/g2-best-software-2022-badge-development.svg" alt="" />
+                    <img className='h-[70px]' src="https://i.ibb.co/Ycffgkg/Screenshot-66-removebg-preview.png" alt="" />
                 </SwiperSlide>
             </Swiper>
 

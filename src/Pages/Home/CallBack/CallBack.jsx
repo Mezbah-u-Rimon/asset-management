@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 const CallBack = () => {
     return (
-        <div className="bg-gradient-to-l from-[#010182fd] to-[#0303813f] pt-20">
+        <div className="bg-gradient-to-l from-[#1766baf6] to-[#1717b73f] pt-20">
             <div className='w-full flex flex-col lg:flex-row justify-center items-center'>
                 <div>
-                    <img className="w-full" src="https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2023/08/CTA-image2.webp" alt="" />
+                    <img className="w-full" src="https://www.tpaim.eu/storage/2020/02/Asset-Management-1536x975.png" alt="" />
                 </div>
 
-                <div className='text-center w-full md:w-3/4 '>
+                <div className='text-center w-full'>
                     <h1 className='text-5xl  font-bold text-white pt-3 pb-7'>
                         Start Innovating Today
                     </h1>

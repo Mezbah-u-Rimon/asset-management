@@ -13,10 +13,10 @@ const Banner = () => {
             <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
                 <SwiperSlide>
                     <div
-                        style={{ backgroundImage: "url('https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2023/08/Overview_Banner.webp')", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}
+                        style={{ backgroundImage: "url('https://assets-global.website-files.com/60edc0a8835d5b38bf11f03f/61cf05798c313369690d6ae9_Asset-Management-System.jpeg')", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}
                         className='w-full h-[400px]'>
 
-                        <div className='bg-gradient-to-r from-[#0404c458]  w-full h-full flex flex-col gap-5 justify-center'>
+                        <div className=' bg-[#20369aad]  w-full h-full flex flex-col gap-5 justify-center'>
 
                             <div className=' px-10 md:px-20 lg:px-[130px]'>
                                 <h1 className='text-5xl  font-bold text-white pt-3 pb-7'>
@@ -34,7 +34,7 @@ const Banner = () => {
 
                 <SwiperSlide>
                     <div
-                        style={{ backgroundImage: "url('https://cdn-bkknn.nitrocdn.com/fGcPNFYNoLNWGSllWzgDxtBAbrFDaIYE/assets/images/optimized/rev-3b327ff/www.caspio.com/wp-content/uploads/2023/08/CTA-image2.webp')", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}
+                        style={{ backgroundImage: "url('https://global.hitachi-solutions.com/wp-content/uploads/2020/08/Your-Complete-Guide-to-Enterprise-Asset-Management.png')", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}
                         className='w-full h-[400px]'>
 
                         <div className='bg-gradient-to-l from-[#010182fd] to-[#0303813f]  w-full h-full flex flex-col gap-5 justify-center'>

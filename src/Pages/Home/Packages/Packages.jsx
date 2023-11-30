@@ -1,4 +1,5 @@
 import { Button, Card, CardBody, CardFooter, Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 
 const Packages = () => {
@@ -18,7 +19,9 @@ const Packages = () => {
                             </Typography>
                         </CardBody>
                         <CardFooter className="py-3">
-                            <Button className="text-black"> Select Package </Button>
+                            <Link to='/payment'>
+                                <Button className="text-black"> Select Package </Button>
+                            </Link>
                         </CardFooter>
                     </Card>
                 </div>
@@ -33,7 +36,9 @@ const Packages = () => {
                             </Typography>
                         </CardBody>
                         <CardFooter className="py-3">
-                            <Button className="text-black"> Select Package </Button>
+                            <Link to="/payment">
+                                <Button className="text-black"> Select Package </Button>
+                            </Link>
                         </CardFooter>
                     </Card>
                 </div>
@@ -48,7 +53,9 @@ const Packages = () => {
                             </Typography>
                         </CardBody>
                         <CardFooter className="py-3">
-                            <Button className="text-black"> Select Package </Button>
+                            <Link to="/payment">
+                                <Button className="text-black"> Select Package </Button>
+                            </Link>
                         </CardFooter>
                     </Card>
                 </div>
