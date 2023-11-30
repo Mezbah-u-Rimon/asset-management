@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosEmployee = axios.create({
-    // baseURL: 'https://asset-management-server-one.vercel.app',
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://asset-management-server-one.vercel.app',
+    // baseURL: 'http://localhost:5000',
     withCredentials: true,
 })
 
