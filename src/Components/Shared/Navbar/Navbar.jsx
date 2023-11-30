@@ -7,14 +7,13 @@ import {
     Button,
     IconButton,
 } from "@material-tailwind/react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaHome, FaListAlt, FaRecycle, FaUser, FaUsers } from "react-icons/fa";
 import { IoMdLogIn } from "react-icons/io";
 import { MdPayment } from "react-icons/md";
 import { MdAddShoppingCart, MdRequestPage } from "react-icons/md";
 import useAuth from "../../../Hooks/useAuth";
 import useAdmin from "../../../Hooks/useAdmin";
-import useEmployee from "../../../Hooks/useEmployee";
 
 
 const NavItem = () => {

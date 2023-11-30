@@ -40,6 +40,10 @@ const AddEmployee = () => {
             members: allAdmin.members - 1,
         }
 
+        const updateEmployee = {
+            approved: true,
+        }
+
         if (allAdmin.members > 0 && allAdmin.members <= allAdmin.members) {
 
             axiosAdmin.post('/addTeam', userInfo)
@@ -50,14 +54,21 @@ const AddEmployee = () => {
                         const adminResult = await axiosAdmin.patch(`/adminUsers/${allAdmin._id}`, totalMembers);
 
                         if (adminResult.data.modifiedCount > 0) {
-                            refetch()
-                            Swal.fire({
-                                position: "top",
-                                icon: "success",
-                                title: `${employee.name} added the ${user.displayName} team Successfully`,
-                                showConfirmButton: false,
-                                timer: 2500
-                            });
+                            //update employee route
+                            const employeeRoute = await axiosAdmin.patch(`/employeeUsers/${employee._id}`, updateEmployee);
+
+                            if (employeeRoute.data.modifiedCount > 0) {
+                                refetch()
+                                Swal.fire({
+                                    position: "top",
+                                    icon: "success",
+                                    title: `${employee.name} added the ${user.displayName} team Successfully`,
+                                    showConfirmButton: false,
+                                    timer: 2500
+                                });
+                            }
+
+
 
                         }
                     }
@@ -131,11 +142,11 @@ const AddEmployee = () => {
                                 </td>
                                 <th>
                                     {
-                                        isAdmin ? <button onClick={() => handleAddTeam(employee)} className="btn btn-ghost ">
-                                            <FaUsers></FaUsers>
-                                        </button> : <button disabled className="btn btn-ghost ">
-                                            <FaUsers></FaUsers>
-                                        </button>
+                                        isAdmin && employee.approved === false ? <button onClick={() => handleAddTeam(employee)} className="btn btn-ghost ">
+                                            <FaUsers className="text-2xl"></FaUsers>
+                                        </button> : <p className="text-green-500">
+                                            Added Team
+                                        </p>
                                     }
 
                                 </th>

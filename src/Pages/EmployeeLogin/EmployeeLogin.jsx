@@ -26,13 +26,14 @@ const EmployeeLogin = () => {
         const date = data.date;
         const photoURL = data.photoURL;
         const role = "employee";
+        const approved = false;
 
         createUser(email, password)
             .then(() => {
                 updateUserProfile(name, photoURL)
                     .then(() => {
                         const userInfo = {
-                            name, email, date, photoURL, role
+                            name, email, date, photoURL, role, approved,
                         }
                         axiosPublic.post('/employeeUsers', userInfo)
                             .then(res => {

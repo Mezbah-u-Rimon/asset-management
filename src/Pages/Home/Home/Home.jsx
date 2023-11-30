@@ -3,6 +3,8 @@ import Banner from "../Banner/Banner";
 import Logo from "../Logo/Logo";
 import About from "../About/About";
 import Packages from "../Packages/Packages";
+import Integration from "../Integration/Integration";
+import CallBack from "../CallBack/CallBack";
 
 
 
@@ -16,6 +18,8 @@ const Home = () => {
             <Logo></Logo>
             <About></About>
             <Packages></Packages>
+            <Integration></Integration>
+            <CallBack></CallBack>
         </div>
     );
 };
