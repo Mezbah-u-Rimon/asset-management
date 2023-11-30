@@ -1,15 +1,13 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
-import useEmployee from "../Hooks/useEmployee";
 import { Circles } from "react-loader-spinner";
 
-const EmployeeRoute = ({ children }) => {
-    const { user, loading } = useAuth()
-    const [isEmployee, isEmployeeLoading] = useEmployee()
-    const location = useLocation()
 
+const PrivateRoute = ({ children }) => {
+    const { user, loading } = useAuth();
+    const location = useLocation();
 
-    if (loading || isEmployeeLoading) {
+    if (loading) {
         return (<div className="flex justify-center items-center w-full h-[300px] bg-white">
             <Circles
                 height="80"
@@ -20,13 +18,14 @@ const EmployeeRoute = ({ children }) => {
                 wrapperClass=""
                 visible={true}
             /> </div>)
-    }
 
-    if (user && isEmployee) {
+    }
+    if (!user) {
+        return <Navigate state={location.pathname} to='/login'></Navigate>
+    }
+    else {
         return children
     }
-
-    return <Navigate to='/employeeLogin' state={{ from: location }} replace> </Navigate>
 };
 
-export default EmployeeRoute;
+export default PrivateRoute;

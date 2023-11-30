@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import useAuth from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
@@ -7,11 +7,10 @@ import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
-    const location = useLocation();
+
     const navigate = useNavigate();
     const { user, signIn } = useAuth();
 
-    const from = location.state?.from?.pathname || "/";
 
     const {
         register,
@@ -23,12 +22,10 @@ const Login = () => {
     const handleLogin = (data) => {
         const email = data.email;
         const password = data.password;
-        console.log(email, password,)
 
 
         signIn(email, password)
-            .then(() => {
-                reset();
+            .then((result) => {
                 Swal.fire({
                     position: "top",
                     icon: "success",
@@ -36,7 +33,8 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-
+                reset();
+                navigate("/")
             })
             .catch(err => {
                 Swal.fire({
@@ -48,7 +46,7 @@ const Login = () => {
                 });
             })
 
-        navigate(from, { replace: true })
+
     }
 
     return (

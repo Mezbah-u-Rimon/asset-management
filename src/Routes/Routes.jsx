@@ -16,6 +16,9 @@ import RequestPage from "../Pages/EmployeePages/RequestPage/RequestPage";
 import AssetPage from "../Pages/EmployeePages/AssetPage/AssetPage";
 import MyAssetPage from "../Pages/EmployeePages/MyAssetPage/MyAssetPage";
 import AllRequestPage from "../Pages/AdminPages/AllRequestPage/AllRequestPage";
+import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
+import EmployeeRoute from "./EmployeeRoute";
 
 
 const router = createBrowserRouter([
@@ -43,45 +46,45 @@ const router = createBrowserRouter([
             //admin route
             {
                 path: "/payment",
-                element: <Payment></Payment>
+                element: <AdminRoute>  <Payment></Payment> </AdminRoute>
             },
             {
                 path: "/addAsset",
-                element: <AddAsset></AddAsset>
+                element: <AdminRoute><AddAsset></AddAsset> </AdminRoute>
             },
             {
                 path: "/assetList",
-                element: <AssetList></AssetList>
+                element: <AdminRoute><AssetList></AssetList> </AdminRoute>
             },
             {
                 path: "/updateItem/:id",
-                element: <UpdateItem></UpdateItem>,
+                element: <AdminRoute><UpdateItem></UpdateItem> </AdminRoute>
             },
             {
                 path: "/addEmployee",
-                element: <AddEmployee></AddEmployee>,
+                element: <AdminRoute> <AddEmployee></AddEmployee> </AdminRoute>,
             },
             {
                 path: "/allRequestPage",
-                element: <AllRequestPage></AllRequestPage>,
+                element: <AdminRoute> <AllRequestPage></AllRequestPage> </AdminRoute>
             },
             {
                 path: "/myTeam",
-                element: <MyTeam></MyTeam>//ata sobai dekhbe
+                element: <PrivateRoute> <MyTeam></MyTeam> </PrivateRoute>   //ata sobai dekhbe
             },
 
             //employees route
             {
                 path: "/assetPage",
-                element: <AssetPage></AssetPage>
+                element: <EmployeeRoute> <AssetPage></AssetPage> </EmployeeRoute>
             },
             {
                 path: "/requestPage/:id",
-                element: <RequestPage></RequestPage>
+                element: <EmployeeRoute> <RequestPage></RequestPage> </EmployeeRoute>
             },
             {
                 path: "/myAssetPage",
-                element: <MyAssetPage></MyAssetPage>
+                element: <EmployeeRoute> <MyAssetPage></MyAssetPage> </EmployeeRoute>
             },
         ]
     },
