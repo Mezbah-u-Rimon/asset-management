@@ -24,6 +24,7 @@ const NavItem = () => {
 
     console.log(isEmployee);
 
+
     const handleLogOut = () => {
         logout()
     }

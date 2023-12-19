@@ -18,7 +18,7 @@ import MyAssetPage from "../Pages/EmployeePages/MyAssetPage/MyAssetPage";
 import AllRequestPage from "../Pages/AdminPages/AllRequestPage/AllRequestPage";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
-// import EmployeeRoute from "./EmployeeRoute";
+import EmployeeRoute from "./EmployeeRoute";
 
 
 const router = createBrowserRouter([
@@ -76,15 +76,15 @@ const router = createBrowserRouter([
             //employees route
             {
                 path: "/assetPage",
-                element: <PrivateRoute> <AssetPage></AssetPage> </PrivateRoute>
+                element: <EmployeeRoute> <AssetPage></AssetPage> </EmployeeRoute>
             },
             {
                 path: "/requestPage/:id",
-                element: <PrivateRoute> <RequestPage></RequestPage> </PrivateRoute>
+                element: <EmployeeRoute> <RequestPage></RequestPage> </EmployeeRoute>
             },
             {
                 path: "/myAssetPage",
-                element: <PrivateRoute> <MyAssetPage></MyAssetPage> </PrivateRoute>
+                element: <EmployeeRoute> <MyAssetPage></MyAssetPage> </EmployeeRoute>
             },
         ]
     },
