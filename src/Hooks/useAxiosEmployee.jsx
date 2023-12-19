@@ -27,7 +27,6 @@ const useAxiosEmployee = () => {
         return response
     }, async (error) => {
         const status = error.response.status;
-        // console.log("kharaf nehi khelna", status);
         if (status === 401 || status === 403) {
             await logout();
             navigate('/login')

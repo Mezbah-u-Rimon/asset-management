@@ -25,7 +25,7 @@ const SocialLogin = () => {
         <div className="mt-5">
 
             <div>
-                <button onClick={handleGoogle} className="btn w-full border-2 border-blue-700 flex gap-3 items-center justify-center text-2xl font-bold py-3 ">
+                <button onClick={handleGoogle} className="btn w-full border-2 border-blue-700 flex gap-3 items-center justify-center text-2xl font-bold  ">
                     <FaGoogle></FaGoogle> Google
                 </button>
             </div>

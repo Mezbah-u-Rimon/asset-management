@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet-async";
 const Login = () => {
 
     const navigate = useNavigate();
-    const { user, signIn } = useAuth();
+    const { signIn } = useAuth();
 
 
     const {
@@ -29,7 +29,7 @@ const Login = () => {
                 Swal.fire({
                     position: "top",
                     icon: "success",
-                    title: `${user.displayName} Login Successfully`,
+                    title: `Login Successfully`,
                     showConfirmButton: false,
                     timer: 1500
                 });

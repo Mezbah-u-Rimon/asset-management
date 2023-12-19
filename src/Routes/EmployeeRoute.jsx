@@ -8,7 +8,6 @@ const EmployeeRoute = ({ children }) => {
     const [isEmployee, isEmployeeLoading] = useEmployee()
     const location = useLocation()
 
-
     if (loading || isEmployeeLoading) {
         return (<div className="flex justify-center items-center w-full h-[300px] bg-white">
             <Circles

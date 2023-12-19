@@ -4,7 +4,6 @@ import {
     Navbar,
     MobileNav,
     Typography,
-    Button,
     IconButton,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
@@ -14,13 +13,16 @@ import { MdPayment } from "react-icons/md";
 import { MdAddShoppingCart, MdRequestPage } from "react-icons/md";
 import useAuth from "../../../Hooks/useAuth";
 import useAdmin from "../../../Hooks/useAdmin";
+import useEmployee from "../../../Hooks/useEmployee";
 
 
 const NavItem = () => {
     const [openNav, setOpenNav] = React.useState(false);
     const { user, logout } = useAuth();
     const [isAdmin] = useAdmin();
-    // const [isEmployee] = useEmployee()
+    const [isEmployee] = useEmployee()
+
+    console.log(isEmployee);
 
     const handleLogOut = () => {
         logout()
@@ -192,7 +194,7 @@ const NavItem = () => {
     );
 
     return (
-        <Navbar className="mx-auto max-w-screen-xl px-4 py-2 text-black lg:px-8 lg:py-4">
+        <Navbar className="mx-auto max-w-screen-xl px-4 py-2 text-black lg:px-8 lg:py-4 rounded-none">
             <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
                 <Typography
                     className="mr-4 cursor-pointer py-1.5 font-medium"
@@ -269,12 +271,9 @@ const NavItem = () => {
                 <div className="container mx-auto">
                     {navList}
                     <div className="flex items-center gap-x-1">
-                        <Button fullWidth variant="text" size="sm" className="">
-                            <span>Log In</span>
-                        </Button>
-                        <Button fullWidth variant="gradient" size="sm" className="">
-                            <span>Sign in</span>
-                        </Button>
+                        {user?.email && <button onClick={handleLogOut} className="btn btn-sm  btn-ghost bg-indigo-500 text-white">Logout
+                        </button>}
+
                     </div>
                 </div>
             </MobileNav>
