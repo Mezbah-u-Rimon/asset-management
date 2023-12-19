@@ -1,7 +1,5 @@
 
- <h3 className="text-xl"> Asset Management </h3>
-
-
+<h3 className="text-2xl"> Asset Management </h3>
 
 <h3 className="text-xl"> Technology </h3>
 <p>
@@ -55,13 +53,13 @@ A form field is provided on the register page.
 </li>
 </ul>
 
- <h1 className="text-xl">
+ <h1 className="text-lg">
  Admin login Email : rimonmesbah10@gmail.com
  </h1>
- <h1 className="text-xl">
+ <h1 className="text-lg">
  Admin login password : 1234A@
  </h1>
 
-<h1 className="text-5xl"> Live Link :
+<h1 className="text-3xl"> Live Link :
 <a href="https://asset-management-0001.netlify.app" target="_blank" rel="noreferrer"> Asset Management Website Live Link  </a>
 </h1>
